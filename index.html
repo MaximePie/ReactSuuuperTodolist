@@ -9,6 +9,16 @@
 
   <!-- Babel -->
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <style>
+    .task {
+        /**
+        Notre style ici
+         */
+
+        font-size: 1.5em;
+    }
+  </style>
 </head>
 <body>
 <div id="root"></div>
@@ -28,17 +38,25 @@
     )
   }
 
+  function Task(props) {
+    console.log(props);
+    const taskText = props.text;
+    return (
+      <p className="task">{taskText}</p>
+    )
+  }
+
   function App() {
     return (
       <div>
         <p>J'aime les salsifis</p>
-        <Paragraph/>
-        <Paragraph/>
-        <Paragraph/>
-        <Paragraph/>
-        <Paragraph/>
-        <Paragraph/>
-        <Paragraph/>
+
+        <div>
+          <Task text={"Ranger le sablier"} age={10}/>
+          <Task text={"Manger un caddie de supermarché"}/>
+          <Task text={"Éteindre les incendies de forêt"}/>
+          <Task text={"Élever des escargots de Bourgogne"}/>
+        </div>
         <Paragraph/>
         <button>J'accepte les CGU que j'ai lues attentivement</button>
       </div>
