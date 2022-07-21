@@ -39,7 +39,6 @@
   }
 
   function Task(props) {
-    console.log(props);
     const taskText = props.text;
     return (
       <p className="task">{taskText}</p>
@@ -47,18 +46,39 @@
   }
 
   function App() {
+
+    const myTasks = [
+      "Ranger le sablier", // 0
+      "Manger un caddie de supermarché", // 1
+      "Éteindre les incendies de forêt", // 2
+      "Élever des escargots de Bourgogne",
+      "Faire tourner les serviettes",
+      "Annoncer une mauvaise nouvelle à Luke",
+      "Tâche secrète, ne pas chercher à savoir sinon attention",
+      "Créer une nouvelle tâche avec pour nom 'créer une nouvelle tâche avec pour nom'",
+    ];
+
     return (
       <div>
-        <p>J'aime les salsifis</p>
-
         <div>
-          <Task text={"Ranger le sablier"} age={10}/>
-          <Task text={"Manger un caddie de supermarché"}/>
-          <Task text={"Éteindre les incendies de forêt"}/>
-          <Task text={"Élever des escargots de Bourgogne"}/>
+          {
+            /**
+             * Pour chaque texte de tâche présent dans le tableau myTask
+             * J'affiche un composant Task
+             * Je lui passe en props le texte de tâche de l'élément courant
+             */
+
+            myTasks.map(function(taskText) {
+              return (
+                <Task text={taskText}/>
+              )
+            })
+          }
+
+          {
+            // myTasks.map((taskText) => <Task text={taskText}/>)
+          }
         </div>
-        <Paragraph/>
-        <button>J'accepte les CGU que j'ai lues attentivement</button>
       </div>
     )
   }
