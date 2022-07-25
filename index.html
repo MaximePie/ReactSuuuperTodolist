@@ -11,13 +11,13 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <style>
-    .task {
-        /**
-        Notre style ici
-         */
+      .task {
+          /**
+          Notre style ici
+           */
 
-        font-size: 1.5em;
-    }
+          font-size: 1.5em;
+      }
   </style>
 </head>
 <body>
@@ -51,6 +51,27 @@
 
   }
 
+  function Counter() {
+    const [mississipi, setMississipi] = React.useState(0);
+    const values = [1, 2, 3, 4, 5, 6];
+
+    // Interdit
+
+    // mississipi = 5;
+    // setMississipi(1);
+
+    return (
+      <div>
+        <h2>The super Pusher !</h2>
+        <h4>Vous avez fait {mississipi} mississipi</h4>
+        <button onClick={() => setMississipi(0)}>Remettre à 0</button>
+        {values.map(value =>
+          <button onClick={() => setMississipi(mississipi + value)}>+ {value} mississipi</button>
+        )}
+      </div>
+    )
+  }
+
   function App() {
 
     const myTasks = [
@@ -67,7 +88,9 @@
     return (
       <div>
         <div>
-          <button onClick={maFonction}>Cliquez-moi</button>
+
+          <Counter/>
+
           {
             /**
              * Pour chaque texte de tâche présent dans le tableau myTask
@@ -75,7 +98,7 @@
              * Je lui passe en props le texte de tâche de l'élément courant
              */
 
-            myTasks.map(function(taskText) {
+            myTasks.map(function (taskText) {
               return (
                 <Task text={taskText} onTaskClick={maFonction}/>
               )
