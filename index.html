@@ -17,6 +17,12 @@
            */
 
           font-size: 1.5em;
+
+          cursor: pointer;
+      }
+
+      .task--isDone {
+          background-color: aquamarine;
       }
   </style>
 </head>
@@ -39,37 +45,31 @@
   }
 
   function Task(props) {
-    const taskText = props.text;
+    // isDone
+
+    const [isDone, setDoneState] = React.useState(false)
+    const taskText = props.text + (isDone ? ' (terminée)' : '');
+
+    let className = 'task'
+    if (isDone) {
+      className += ' task--isDone';
+    }
+
     return (
       <p
-        className="task"
-        onClick={props.onTaskClick}
+        className={className}
+        onClick={finishTask}
       >
         {taskText}
       </p>
     )
 
-  }
-
-  function Counter() {
-    const [mississipi, setMississipi] = React.useState(0);
-    const values = [1, 2, 3, 4, 5, 6];
-
-    // Interdit
-
-    // mississipi = 5;
-    // setMississipi(1);
-
-    return (
-      <div>
-        <h2>The super Pusher !</h2>
-        <h4>Vous avez fait {mississipi} mississipi</h4>
-        <button onClick={() => setMississipi(0)}>Remettre à 0</button>
-        {values.map(value =>
-          <button onClick={() => setMississipi(mississipi + value)}>+ {value} mississipi</button>
-        )}
-      </div>
-    )
+    /**
+     * Passer l'état de la tâche sur "Terminée"
+     */
+    function finishTask() {
+      setDoneState(true)
+    }
   }
 
   function App() {
@@ -88,9 +88,6 @@
     return (
       <div>
         <div>
-
-          <Counter/>
-
           {
             /**
              * Pour chaque texte de tâche présent dans le tableau myTask
