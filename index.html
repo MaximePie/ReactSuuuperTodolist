@@ -41,8 +41,14 @@
   function Task(props) {
     const taskText = props.text;
     return (
-      <p className="task">{taskText}</p>
+      <p
+        className="task"
+        onClick={props.onTaskClick}
+      >
+        {taskText}
+      </p>
     )
+
   }
 
   function App() {
@@ -61,6 +67,7 @@
     return (
       <div>
         <div>
+          <button onClick={maFonction}>Cliquez-moi</button>
           {
             /**
              * Pour chaque texte de tâche présent dans le tableau myTask
@@ -70,7 +77,7 @@
 
             myTasks.map(function(taskText) {
               return (
-                <Task text={taskText}/>
+                <Task text={taskText} onTaskClick={maFonction}/>
               )
             })
           }
@@ -81,6 +88,13 @@
         </div>
       </div>
     )
+
+    /**
+     * Affiche "J'ai été cliqué" dans la console
+     */
+    function maFonction() {
+      console.log("J'ai été cliqué");
+    }
   }
 
 
