@@ -104,7 +104,13 @@
 
     return (
       <div>
-        {tasks.map((taskText, index) => <Task text={taskText} onDelete={() => supprimerTacheSurPosition(index)}/>)}
+        {tasks.map((taskText, index) =>
+          <Task
+            key={taskText}
+            text={taskText}
+            onDelete={() => supprimerTacheSurPosition(index)}
+          />
+        )}
       </div>
     )
 
