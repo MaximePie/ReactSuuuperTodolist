@@ -56,12 +56,15 @@
     }
 
     return (
-      <p
-        className={className}
-        onClick={finishTask}
-      >
-        {taskText}
-      </p>
+      <div>
+        <span
+          className={className}
+          onClick={finishTask}
+        >
+          {taskText}
+        </span>
+        <button>X</button>
+      </div>
     )
 
     /**
@@ -72,9 +75,14 @@
     }
   }
 
-  function App() {
 
-    const myTasks = [
+  /**
+   * Quand je clique sur un bouton "supprimer"
+   * La tâche disparaisse de la liste des tâches
+   * Créer un state tasks qui sera le tableau contenant les tâches
+   */
+  function Tasks() {
+    const initialTasks = [
       "Ranger le sablier", // 0
       "Manger un caddie de supermarché", // 1
       "Éteindre les incendies de forêt", // 2
@@ -85,29 +93,28 @@
       "Créer une nouvelle tâche avec pour nom 'créer une nouvelle tâche avec pour nom'",
     ];
 
+    const [tasks, setTasks] = React.useState(initialTasks)
+
     return (
       <div>
-        <div>
-          {
-            /**
-             * Pour chaque texte de tâche présent dans le tableau myTask
-             * J'affiche un composant Task
-             * Je lui passe en props le texte de tâche de l'élément courant
-             */
-
-            myTasks.map(function (taskText) {
-              return (
-                <Task text={taskText} onTaskClick={maFonction}/>
-              )
-            })
-          }
-
-          {
-            // myTasks.map((taskText) => <Task text={taskText}/>)
-          }
-        </div>
+        {tasks.map((taskText) => <Task text={taskText} />)}
+        <button onClick={supprimerPremiereTache}>Supprimer la première tâche</button>
       </div>
     )
+
+    /**
+     * Supprime la première tâche du tableau
+     * @see https://www.w3schools.com/jsref/jsref_shift.asp#:~:text=The%20shift()%20method%20removes,method%20returns%20the%20shifted%20element.
+     * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+     */
+    function supprimerPremiereTache() {
+      // 1 - Créer une copie du tableau tasks
+      const updatedTasks = [...tasks]; // Destructuring
+      // 2 - Modifier la copie (shift)
+      updatedTasks.shift();
+      // 3 - Mettre à jour le state tasks avec setTasks
+      setTasks(updatedTasks);
+    }
 
     /**
      * Affiche "J'ai été cliqué" dans la console
@@ -115,6 +122,14 @@
     function maFonction() {
       console.log("J'ai été cliqué");
     }
+  }
+
+  function App() {
+    return (
+      <div>
+        <Tasks/>
+      </div>
+    )
   }
 
 
